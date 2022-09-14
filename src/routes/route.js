@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const  mongoose  = require("mongoose")
 const internController=require('../controllers/internController')
 const collegeController=require('../controllers/collegeController')
 const getCollegeController=require('../controllers/getCollegeController')
