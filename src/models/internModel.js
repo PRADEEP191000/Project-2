@@ -1,4 +1,4 @@
-const moment = require('moment');
+
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Schema.Types.ObjectId
 
@@ -10,7 +10,7 @@ const InternSchema = new mongoose.Schema({
 
  mobile:{type:String ,unique:true } ,
 
- college:{type:ObjectId,ref:"College", required: true},
+ collegeId:{type:ObjectId,ref:"College", required: true},
 
  isDeleted:{type:Boolean,default:false}
 

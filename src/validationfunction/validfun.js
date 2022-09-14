@@ -15,8 +15,14 @@ const internValidation = function (intern) {
 const nameValidation = function(name) {
 
     if (typeof name === 'undefined' || name === null) {return false};
+<<<<<<< HEAD
     if (typeof name === 'string' && name.trim().length === 0) {return false};
     return true;
+=======
+    if (typeof name === 'string' && name.trim().length === 0){ return false};
+   
+    return true
+>>>>>>> df861b98b5505aa7420f9c0cbc588d94bcc5dc77
 
 };
 

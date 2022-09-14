@@ -1,7 +1,5 @@
-const moment = require('moment')
-const jwt = require("jsonwebtoken")
 
-const  mongoose  = require("mongoose")
+const { default: mongoose } = require('mongoose')
 const internModel = require("../models/internModel")
 const collegeModel = require("../models/collegeModel")
 const validfun = require("../validationfunction/validfun")
@@ -38,6 +36,9 @@ const createIntern = async function (req, res) {
         if (!emailRegex.test(email)) {return res.status(400).send({ status: false, msg: "Invalid emailId" })}
         if (!mobileRegex.test(mobile)) {return res.status(400).send({ status: false, msg: "Invalid mobile number" })}
 
+        const avlebalData=await collegeModel.find({email:email,mobile:mobile})
+        if(avlebalData.length>0){return res.status(409).send({status:false,msg:"user alreeady exists"})}
+
         let object = {}
         if (name !== null) { object.name = name }
         if (email !== null) { object.email = email }
@@ -45,7 +46,7 @@ const createIntern = async function (req, res) {
 
         let collegeId = await collegeModel.findOne({name:collegeName})
         if (!collegeId) {res.status(404).send({ status: false, msg: " college is not present" })}
-        if (collegeId !== null) { object.collegeId = collegeId }
+        if (collegeId !== null) { object.collegeId = collegeId._id.toString() }
 
     
         let savedData = await internModel.create(object);
